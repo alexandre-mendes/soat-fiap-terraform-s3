@@ -21,4 +21,6 @@ jobs:
             console.log("✅ Token OIDC gerado com sucesso");
 
       - name: Mostrar pedaço do token
-        run: echo "Token: ${{ steps.oidc.outputs.token }}" | cut -c -60
+        run: |
+          echo "Token gerado:"
+          echo "${{ steps.oidc.outputs.token }}" | cut -c -100
