@@ -16,6 +16,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: arn:aws:iam::175707590522:role/GitHubActionsS3Role
+          role-session-name: github-actions-session
           aws-region: us-east-1
 
       - name: Instalar Terraform
