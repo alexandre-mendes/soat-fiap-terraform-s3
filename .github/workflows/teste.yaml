@@ -1,0 +1,24 @@
+name: Teste OIDC Token
+
+on:
+  workflow_dispatch:
+
+jobs:
+  oidc-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Gerar token OIDC manualmente
+        id: oidc
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const token = await core.getIDToken();
+            core.setOutput("token", token);
+            console.log("✅ Token OIDC gerado com sucesso");
+
+      - name: Mostrar pedaço do token
+        run: echo "Token: ${{ steps.oidc.outputs.token }}" | cut -c -60
