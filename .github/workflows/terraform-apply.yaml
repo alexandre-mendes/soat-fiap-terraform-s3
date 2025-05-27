@@ -3,6 +3,9 @@ name: Terraform Apply - S3
 on:
   workflow_dispatch:
 
+env:
+  AWS_REGION: us-east-1
+
 jobs:
   terraform:
     name: Apply Terraform
@@ -17,7 +20,8 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Instalar Terraform
         uses: hashicorp/setup-terraform@v2
